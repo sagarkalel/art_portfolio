@@ -23,7 +23,7 @@ class MyPortfolioApp extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return MaterialApp(
-          title: 'Sagar Kalel - Art Portfolio',
+          title: 'Sagar Kalel - Arts',
           debugShowCheckedModeBanner: false,
           theme: themeProvider.currentTheme,
           themeMode: ThemeMode.system,

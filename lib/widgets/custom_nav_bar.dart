@@ -50,46 +50,48 @@ class _CustomNavBarState extends State<CustomNavBar>
     final isMobile = ResponsiveUtil.isMobile(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
 
-    return SlideTransition(
-      position: _slideAnimation,
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: Container(
-          padding: isMobile
-              ? const EdgeInsets.symmetric(horizontal: 20, vertical: 16)
-              : const EdgeInsets.symmetric(horizontal: 60, vertical: 24),
-          decoration: BoxDecoration(
-            color: themeProvider.getSurfaceColor(context).withOpacity(0.95),
-            border: Border(
-              bottom: BorderSide(
-                color: themeProvider.getBorderColor(context),
-                width: 1,
+    return SafeArea(
+      child: SlideTransition(
+        position: _slideAnimation,
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Container(
+            padding: isMobile
+                ? const EdgeInsets.symmetric(horizontal: 20, vertical: 16)
+                : const EdgeInsets.symmetric(horizontal: 60, vertical: 24),
+            decoration: BoxDecoration(
+              color: themeProvider.getSurfaceColor(context).withOpacity(0.95),
+              border: Border(
+                bottom: BorderSide(
+                  color: themeProvider.getBorderColor(context),
+                  width: 1,
+                ),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildLogo(isMobile, themeProvider),
-              Row(
-                children: [
-                  if (!isMobile) _buildDesktopNav(themeProvider),
-                  SizedBox(width: isMobile ? 12 : 24),
-                  _buildThemeToggle(themeProvider),
-                  if (isMobile) ...[
-                    const SizedBox(width: 12),
-                    _buildMobileMenu(themeProvider),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildLogo(isMobile, themeProvider),
+                Row(
+                  children: [
+                    if (!isMobile) _buildDesktopNav(themeProvider),
+                    SizedBox(width: isMobile ? 12 : 24),
+                    _buildThemeToggle(themeProvider),
+                    if (isMobile) ...[
+                      const SizedBox(width: 12),
+                      _buildMobileMenu(themeProvider),
+                    ],
                   ],
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
